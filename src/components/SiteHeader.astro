@@ -1,0 +1,83 @@
+---
+import { bookingUrl, business, navLinks } from "../data/site";
+---
+
+<header
+  class="sticky top-0 z-10 py-4 backdrop-blur-[14px] bg-[rgba(247,241,232,0.7)] border-b border-[rgba(53,34,28,0.06)]"
+  x-data="{ open: false }"
+>
+  <div class="shell flex items-center justify-between gap-4">
+    <a href="/" class="grid gap-[0.15rem]" aria-label={`${business.name} home`}>
+      <span class="text-[0.72rem] tracking-[0.16em] uppercase text-muted">Chesterfield hair studio</span>
+      <span class="text-[1.55rem] tracking-[-0.04em]">{business.name}</span>
+    </a>
+
+    <button
+      class="menu-toggle py-3 px-4 rounded-full border border-line bg-white/50"
+      type="button"
+      @click="open = !open"
+      :aria-expanded="open.toString()"
+      aria-controls="site-nav"
+    >
+      Menu
+    </button>
+
+    <nav
+      id="site-nav"
+      class="site-nav"
+      :class="{ 'is-open': open }"
+    >
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "py-2 px-3 text-muted",
+            Astro.url.pathname === link.href && "!text-text",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href={bookingUrl} class="button button--small button--solid">
+        {business.bookingLabel}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 1rem;
+      right: 1rem;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem;
+      border: 1px solid var(--color-line);
+      border-radius: 24px;
+      background: rgba(251, 244, 235, 0.96);
+      box-shadow: var(--shadow-brand);
+    }
+
+    .site-nav.is-open {
+      display: flex;
+    }
+  }
+</style>

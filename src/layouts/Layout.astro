@@ -1,0 +1,66 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { business } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  name: business.name,
+  description: business.description,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: business.addressLines[0],
+    addressLocality: business.addressLines[1],
+    postalCode: business.addressLines[2],
+    addressCountry: "GB",
+  },
+  sameAs: [business.instagram, business.facebook],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="/media/hero-editorial.svg" />
+    <link rel="canonical" href={canonical} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </head>
+  <body>
+    <div class="relative overflow-clip">
+      <div class="fixed w-[32rem] h-[32rem] rounded-full blur-[110px] opacity-35 pointer-events-none -z-10 -left-[10rem] top-[6rem] bg-[rgba(215,171,145,0.65)]"></div>
+      <div class="fixed w-[32rem] h-[32rem] rounded-full blur-[110px] opacity-35 pointer-events-none -z-10 -right-[10rem] top-[22rem] bg-[rgba(137,94,78,0.3)]"></div>
+      <SiteHeader />
+      <main>
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+
+    <script>
+      import Alpine from "alpinejs";
+
+      window.Alpine = Alpine;
+      Alpine.start();
+    </script>
+  </body>
+</html>

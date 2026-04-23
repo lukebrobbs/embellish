@@ -1,0 +1,31 @@
+---
+import { bookingUrl, business, navLinks } from "../data/site";
+---
+
+<footer class="pt-8 pb-16 border-t border-[rgba(53,34,28,0.08)]">
+  <div class="shell grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+    <div>
+      <p class="eyebrow">Embellish Studio</p>
+      <p class="max-w-[38rem] text-muted text-[1.02rem]">
+        Editorial polish for Chesterfield salon visits and wedding mornings.
+      </p>
+    </div>
+
+    <div>
+      <p class="mb-[0.7rem] uppercase tracking-[0.14em] text-[0.75rem] text-muted">Visit</p>
+      <p>{business.addressLines.join(", ")}</p>
+      <a href={business.mapsUrl}>Open in maps</a>
+    </div>
+
+    <div>
+      <p class="mb-[0.7rem] uppercase tracking-[0.14em] text-[0.75rem] text-muted">Explore</p>
+      <div class="grid gap-4">
+        {navLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+        <a href={business.instagram}>Instagram</a>
+        <a href={bookingUrl}>Book on Fresha</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import WeddingForm from "../components/WeddingForm.astro";
+import { bridalFaqs, galleryItems, weddingProcess } from "../data/site";
+
+const bridalGallery = galleryItems
+  .filter((item) => item.category === "bridal")
+  .concat(galleryItems.slice(0, 2));
+---
+
+<Layout
+  title="Weddings | Embellish Studio"
+  description="Consultation-led bridal hair from Embellish Studio, with a dedicated enquiry experience for weddings in and around Chesterfield."
+>
+  <section class="page-hero shell max-w-[52rem]">
+    <p class="eyebrow">Weddings</p>
+    <h1>Bridal styling with a calmer, more bespoke journey.</h1>
+    <p class="max-w-[38rem] text-muted text-[1.02rem]">
+      Weddings sit alongside the salon offer, but the tone here is softer and
+      more tailored. This page is built to support trust, imagery, and a proper
+      consultation-first enquiry.
+    </p>
+  </section>
+
+  <section class="shell section grid grid-cols-[1.15fr_0.85fr] gap-6 max-[900px]:grid-cols-1">
+    <div>
+      <SectionHeading
+        eyebrow="Bridal experience"
+        title="Designed for the morning itself, not just the hairstyle."
+        intro="The website gives weddings their own dedicated path so enquiries feel intentional from the first click."
+      />
+      <div class="grid gap-4">
+        {weddingProcess.map((step, index) => (
+          <div class="grid grid-cols-[auto_1fr] gap-4 items-start py-4 border-t border-line">
+            <span class="w-[2.2rem] h-[2.2rem] inline-grid place-items-center rounded-full bg-champagne">{index + 1}</span>
+            <p>{step}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="hero-frame">
+      <img
+        src="/media/gallery-bridal.svg"
+        alt="Editorial placeholder artwork for wedding styling visuals"
+        class="min-h-[38rem] object-cover"
+      />
+    </div>
+  </section>
+
+  <section class="shell section">
+    <SectionHeading
+      eyebrow="Bridal gallery"
+      title="A visual space reserved for bridal detail, texture, and finish."
+      intro="These placeholders are intentionally sized for real wedding morning imagery and future campaign content."
+    />
+    <div class="grid grid-cols-3 gap-6 mb-6 max-[900px]:grid-cols-1">
+      {bridalGallery.map((item) => (
+        <article class="card overflow-hidden">
+          <img src={item.image} alt={item.alt} loading="lazy" class="w-full aspect-[4/5] object-cover" />
+          <div class="pt-[1.1rem] px-[1.2rem] pb-[1.3rem]">
+            <p class="eyebrow">{item.category}</p>
+            <h3>{item.title}</h3>
+            <p>{item.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell section grid grid-cols-[1.15fr_0.85fr] gap-6 max-[900px]:grid-cols-1">
+    <div class="card p-6">
+      <p class="eyebrow">Frequently asked</p>
+      <h2>What couples usually need to know first.</h2>
+      <div class="grid gap-4">
+        {bridalFaqs.map((faq) => (
+          <article>
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+    <WeddingForm />
+  </section>
+</Layout>

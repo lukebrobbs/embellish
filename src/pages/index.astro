@@ -1,0 +1,142 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import {
+  bookingUrl,
+  business,
+  galleryItems,
+  serviceCategories,
+  testimonials,
+} from "../data/site";
+
+const featuredGallery = galleryItems.slice(0, 3);
+---
+
+<Layout
+  title="Embellish Studio | Chesterfield Hair Salon and Bridal Hair"
+  description="A polished Chesterfield hair salon for cuts, colour, styling, and bridal hair, with Fresha booking and an elevated editorial presentation."
+>
+  <section class="shell grid grid-cols-[1.15fr_0.85fr] items-end gap-6 pt-20 pb-8 max-[900px]:grid-cols-1 max-[640px]:pt-[3.25rem]">
+    <div>
+      <p class="eyebrow">Hair studio in Chesterfield</p>
+      <h1>Hair that feels premium before you even sit in the chair.</h1>
+      <p class="max-w-[38rem] text-muted text-[1.02rem]">
+        Embellish Studio pairs polished salon work with a confident, editorial
+        point of view. Book your next colour, finish, or styling appointment,
+        or enquire about weddings with a more bespoke experience.
+      </p>
+      <div class="flex flex-wrap gap-[0.85rem]">
+        <a href={bookingUrl} class="button button--solid">{business.bookingLabel}</a>
+        <a href="/weddings" class="button button--ghost">Explore weddings</a>
+      </div>
+      <div class="flex flex-wrap gap-[0.85rem] mt-8">
+        {business.heroStats.map((stat) => (
+          <div class="card py-4 px-[1.1rem] min-w-[8.2rem]">
+            <strong class="block text-[1.8rem] tracking-[-0.04em]">{stat.value}</strong>
+            <span class="text-muted">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="hero-frame">
+      <img
+        src="/media/hero-editorial.svg"
+        alt="Editorial placeholder artwork for Embellish Studio hero imagery"
+      />
+      <div class="absolute left-8 bottom-8 max-w-[17rem] py-4 px-[1.1rem] rounded-sm bg-[rgba(34,23,20,0.82)] text-[#f9efe4] max-[640px]:static max-[640px]:mt-4 max-[640px]:max-w-none">
+        <span class="inline-block mb-[0.35rem] uppercase tracking-[0.18em] text-[0.7rem]">Launch-ready visual system</span>
+        <p>
+          The hero is built to accept social reels, campaign imagery, or a
+          professional salon shoot without changing the layout.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section">
+    <SectionHeading
+      eyebrow="Signature work"
+      title="Selected services, not an overwhelming menu."
+      intro="The site keeps service copy concise and aspirational, then hands off deeper booking detail to Fresha where clients already trust the flow."
+    />
+    <div class="grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+      {serviceCategories.map((category) => (
+        <article class="card p-6">
+          <h3>{category.name}</h3>
+          <p>{category.description}</p>
+          <ul class="pl-5 text-muted">
+            {category.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell section grid grid-cols-[1.15fr_0.85fr] gap-6 max-[900px]:grid-cols-1">
+    <div>
+      <SectionHeading
+        eyebrow="Trust"
+        title="Built around visible results and confident client proof."
+        intro={business.reviewsSummary}
+      />
+      <div class="grid gap-4">
+        {testimonials.map((testimonial) => (
+          <blockquote class="card p-6">
+            <p>"{testimonial.quote}"</p>
+            <footer class="grid gap-1">
+              <strong>{testimonial.name}</strong>
+              <span class="text-muted">{testimonial.context}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+    <aside class="card p-6 self-start">
+      <p class="eyebrow">Why this site feels different</p>
+      <h3>Luxury cues, local clarity.</h3>
+      <p>
+        The experience is intentionally more fashion-led than a typical salon
+        brochure site, but the conversion path stays simple: see the work, trust
+        the salon, then book quickly.
+      </p>
+      <a href="/services" class="text-link">See service highlights</a>
+    </aside>
+  </section>
+
+  <section class="shell section">
+    <SectionHeading
+      eyebrow="Portfolio"
+      title="A gallery system ready for Instagram stills, reels, and future campaign imagery."
+      intro="Version one can launch with what already exists while preserving room for sharper assets later."
+    />
+    <div class="grid grid-cols-3 gap-6 mb-6 max-[900px]:grid-cols-1">
+      {featuredGallery.map((item) => (
+        <article class="card overflow-hidden">
+          <img src={item.image} alt={item.alt} loading="lazy" class="w-full aspect-[4/5] object-cover" />
+          <div class="pt-[1.1rem] px-[1.2rem] pb-[1.3rem]">
+            <p class="eyebrow">{item.category}</p>
+            <h3>{item.title}</h3>
+            <p>{item.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <a href="/gallery" class="button button--ghost">View full gallery</a>
+  </section>
+
+  <section class="shell section callout">
+    <div>
+      <p class="eyebrow">Weddings</p>
+      <h2>Bridal hair has its own space and its own pace.</h2>
+      <p>
+        Wedding bookings are treated as a consultation-led service, separate
+        from standard salon appointments. The page and enquiry flow are built to
+        feel calmer, more bespoke, and easier to trust.
+      </p>
+    </div>
+    <a href="/weddings" class="button button--solid">Start a bridal enquiry</a>
+  </section>
+</Layout>

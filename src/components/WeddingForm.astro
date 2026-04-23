@@ -1,0 +1,75 @@
+---
+const submitted = Astro.url.searchParams.get("submitted") === "1";
+---
+
+<section class="grid gap-4">
+  <div class="mb-7">
+    <p class="eyebrow">Bridal enquiry</p>
+    <h2>Tell us about the day.</h2>
+    <p class="max-w-[38rem] text-muted text-[1.02rem]">
+      This form is built to work without JavaScript, with a smoother inline
+      confirmation when JavaScript is available.
+    </p>
+  </div>
+
+  {submitted && (
+    <div class="card p-6" role="status">
+      Thank you. Your bridal enquiry has been received and is ready for
+      follow-up.
+    </div>
+  )}
+
+  <form
+    class="card p-6"
+    action="/api/bridal-enquiry"
+    method="post"
+    x-data="{ loading: false }"
+    @submit="loading = true"
+  >
+    <div class="grid grid-cols-3 gap-6 mb-6 max-[900px]:grid-cols-1">
+      <label>
+        Name
+        <input name="name" type="text" required autocomplete="name" />
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" required autocomplete="email" />
+      </label>
+      <label>
+        Wedding date
+        <input name="date" type="date" required />
+      </label>
+      <label>
+        Getting-ready location
+        <input name="location" type="text" required />
+      </label>
+      <label>
+        Party size
+        <input name="partySize" type="number" min="1" required />
+      </label>
+      <label>
+        Services needed
+        <input
+          name="services"
+          type="text"
+          placeholder="Bride only, bride + bridesmaids, trials..."
+          required
+        />
+      </label>
+    </div>
+
+    <label class="mb-6">
+      Inspiration or notes
+      <textarea
+        name="notes"
+        rows="5"
+        placeholder="Timings, style ideas, venue, veil, or anything helpful."
+      ></textarea>
+    </label>
+
+    <button class="button button--solid" type="submit" :disabled="loading">
+      <span x-show="!loading">Send bridal enquiry</span>
+      <span x-show="loading">Sending...</span>
+    </button>
+  </form>
+</section>

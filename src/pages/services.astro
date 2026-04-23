@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { bookingUrl, serviceCategories } from "../data/site";
+---
+
+<Layout
+  title="Services | Embellish Studio"
+  description="Explore Embellish Studio service highlights for cuts, colour, styling, and special-occasion hair, then book through Fresha."
+>
+  <section class="page-hero shell">
+    <p class="eyebrow">Services</p>
+    <h1>Curated service highlights for clients who want clarity fast.</h1>
+    <p class="max-w-[38rem] text-muted text-[1.02rem]">
+      This page is deliberately selective. It introduces the shape of the
+      service offering without duplicating the full Fresha menu.
+    </p>
+    <a href={bookingUrl} class="button button--solid">Book via Fresha</a>
+  </section>
+
+  <section class="shell section">
+    <SectionHeading
+      eyebrow="What we focus on"
+      title="Cuts, colour, finish, and elevated styling."
+      intro="Each block is written to help someone understand the vibe of the appointment before they move into booking."
+    />
+    <div class="grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+      {serviceCategories.map((category) => (
+        <article class="card p-6">
+          <h2>{category.name}</h2>
+          <p>{category.description}</p>
+          <ul class="pl-5 text-muted">
+            {category.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell section grid grid-cols-[1.15fr_0.85fr] gap-6 max-[900px]:grid-cols-1">
+    <div class="card p-6 self-start">
+      <p class="eyebrow">Approach</p>
+      <h3>Editorial polish, everyday wearability.</h3>
+      <p>
+        The tone of the site reflects a salon experience that feels elevated,
+        but still grounded in practical consultation, maintenance, and client
+        comfort.
+      </p>
+    </div>
+    <div class="card p-6">
+      <p class="eyebrow">Booking flow</p>
+      <h3>Keep the website inspirational. Let Fresha handle the detail.</h3>
+      <p>
+        Clients can browse the full service list, timings, and final prices on
+        Fresha once they are ready to book. That keeps this website lighter and
+        more distinctive.
+      </p>
+      <a href={bookingUrl} class="text-link">Open the Fresha menu</a>
+    </div>
+  </section>
+</Layout>

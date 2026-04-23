@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MediaGrid from "../components/MediaGrid.astro";
+import { galleryItems } from "../data/site";
+---
+
+<Layout
+  title="Gallery | Embellish Studio"
+  description="A portfolio page for Embellish Studio, built to showcase cuts, colour, styling, and bridal work with an editorial finish."
+>
+  <section class="page-hero shell">
+    <p class="eyebrow">Gallery</p>
+    <h1>Built for close-up detail, mirror moments, and future reel stills.</h1>
+    <p class="max-w-[38rem] text-muted text-[1.02rem]">
+      The gallery uses lightweight Alpine filtering so it stays fast while still
+      feeling interactive.
+    </p>
+  </section>
+
+  <section class="shell section">
+    <MediaGrid items={galleryItems} />
+  </section>
+</Layout>

@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+/* ============================================================
+   THEME — static design tokens registered as Tailwind utilities
+   ============================================================ */
+@theme {
+  /* Colors */
+  --color-background: #f7f1e8;
+  --color-surface: rgba(252, 248, 242, 0.8);
+  --color-surface-strong: #fbf4eb;
+  --color-surface-dark: #2d1e1a;
+  --color-text: #221714;
+  --color-muted: #6f5c57;
+  --color-line: rgba(53, 34, 28, 0.12);
+  --color-accent: #9f5a3c;
+  --color-accent-soft: #dcb09c;
+  --color-champagne: #efe0d1;
+
+  /* Shadows */
+  --shadow-brand: 0 24px 80px rgba(43, 25, 18, 0.08);
+
+  /* Border radius — overrides Tailwind defaults with project scale */
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
+}
+
+/* ============================================================
+   ROOT — computed / dynamic tokens that cannot go in @theme
+   ============================================================ */
+:root {
+  --shell: min(1180px, calc(100vw - 2rem));
+  color-scheme: light;
+}
+
+/* ============================================================
+   BASE — element-level defaults
+   (box-sizing: border-box is handled by Tailwind's preflight)
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--color-text);
+    background:
+      radial-gradient(circle at top left, rgba(211, 163, 135, 0.24), transparent 36%),
+      radial-gradient(circle at top right, rgba(116, 78, 61, 0.16), transparent 28%),
+      linear-gradient(180deg, #fffaf4 0%, var(--color-background) 42%, #efe7dc 100%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  blockquote {
+    margin-top: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  p,
+  li,
+  span,
+  label,
+  input,
+  textarea {
+    line-height: 1.6;
+  }
+
+  /* Vertical rhythm — restore sensible element spacing that preflight removes */
+  h1:not(:last-child),
+  h2:not(:last-child),
+  h3:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+
+  p:not(:last-child),
+  ul:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+  }
+
+  label {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(53, 34, 28, 0.14);
+    background: rgba(255, 255, 255, 0.72);
+  }
+}
+
+/* ============================================================
+   COMPONENTS — reusable patterns too complex or too repeated
+   for inline utilities
+   ============================================================ */
+@layer components {
+  /* Layout container — uses computed CSS variable, can't be a utility */
+  .shell {
+    width: var(--shell);
+    margin: 0 auto;
+  }
+
+  /* Section vertical rhythm — used on every page section */
+  .section {
+    padding: 2rem 0 4rem;
+  }
+
+  /* Page hero — used on every inner page */
+  .page-hero {
+    padding: 4rem 0 1rem;
+  }
+
+  /* Eyebrow label — used in 10+ components */
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+
+  /* Card surface — shared by 9 different card-style elements */
+  .card {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-brand);
+  }
+
+  /* Hero image frame — complex multi-stop gradient */
+  .hero-frame {
+    position: relative;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.08)),
+      linear-gradient(150deg, rgba(255, 255, 255, 0.4), rgba(190, 143, 120, 0.36));
+    border: 1px solid rgba(53, 34, 28, 0.08);
+  }
+
+  .hero-frame img {
+    width: 100%;
+    border-radius: calc(var(--radius-lg) - 8px);
+  }
+
+  /* Buttons */
+  .button,
+  .text-link,
+  .filter-chip {
+    transition:
+      transform 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3.2rem;
+    padding: 0.9rem 1.35rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+  }
+
+  .button:hover,
+  .button:focus-visible,
+  .filter-chip:hover,
+  .filter-chip:focus-visible {
+    transform: translateY(-1px);
+  }
+
+  .button--solid {
+    background: var(--color-surface-dark);
+    color: #fff5ed;
+    border-color: transparent;
+  }
+
+  .button--ghost {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+  }
+
+  .button--small {
+    min-height: 2.8rem;
+    padding-inline: 1rem;
+  }
+
+  .text-link {
+    color: var(--color-accent);
+  }
+
+  /* Filter chips — Alpine-toggled state */
+  .filter-chip {
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 0.8rem 1rem;
+    text-transform: capitalize;
+  }
+
+  .filter-chip--active {
+    background: var(--color-surface-dark);
+    color: #fff5ed;
+    border-color: transparent;
+  }
+
+  /* Callout — complex gradient, responsive direction change */
+  .callout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(37, 24, 20, 0.96), rgba(97, 58, 42, 0.92));
+    color: #fff2e8;
+  }
+
+  @media (max-width: 900px) {
+    .callout {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .button,
+    .filter-chip {
+      width: 100%;
+    }
+  }
+}

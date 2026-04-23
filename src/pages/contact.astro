@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { bookingUrl, business } from "../data/site";
+---
+
+<Layout
+  title="Contact and Book | Embellish Studio"
+  description="Visit Embellish Studio on Chatsworth Road in Chesterfield, book on Fresha, or get in touch for wedding enquiries."
+>
+  <section class="page-hero shell">
+    <p class="eyebrow">Contact / Book</p>
+    <h1>Find the studio, follow the work, and book with clarity.</h1>
+    <p class="max-w-[38rem] text-muted text-[1.02rem]">
+      Everything practical lives here: booking, opening hours, directions, and
+      the fastest links into the salon's online presence.
+    </p>
+  </section>
+
+  <section class="shell section grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+    <article class="card p-6">
+      <p class="eyebrow">Book</p>
+      <h2>Regular salon appointments</h2>
+      <p>
+        Use Fresha for the full appointment menu, timings, and live availability.
+      </p>
+      <a href={bookingUrl} class="button button--solid">Book on Fresha</a>
+    </article>
+
+    <article class="card p-6">
+      <p class="eyebrow">Visit</p>
+      <h2>{business.addressLines[0]}</h2>
+      <p>{business.addressLines[1]}, {business.addressLines[2]}</p>
+      <a href={business.mapsUrl} class="text-link">Open directions</a>
+    </article>
+
+    <article class="card p-6">
+      <p class="eyebrow">Follow</p>
+      <h2>Instagram-first social presence</h2>
+      <p>
+        The website reinforces Instagram as the salon's most visual channel for
+        fresh work and behind-the-chair content.
+      </p>
+      <a href={business.instagram} class="text-link">Open Instagram</a>
+    </article>
+  </section>
+
+  <section class="shell section grid grid-cols-[1.15fr_0.85fr] gap-6 max-[900px]:grid-cols-1">
+    <div class="card p-6">
+      <p class="eyebrow">Opening hours</p>
+      <h2>Plan around the studio week.</h2>
+      <div class="grid gap-4">
+        {business.hours.map((entry) => (
+          <div class="flex justify-between gap-4 py-[0.85rem] border-b border-line">
+            <span>{entry.day}</span>
+            <strong>{entry.hours}</strong>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="card p-6 self-start">
+      <p class="eyebrow">Weddings</p>
+      <h3>Bridal hair has a separate enquiry path.</h3>
+      <p>
+        Wedding bookings are handled through the dedicated enquiry flow instead
+        of the standard salon booking journey.
+      </p>
+      <a href="/weddings" class="button button--ghost">Go to weddings</a>
+    </div>
+  </section>
+</Layout>

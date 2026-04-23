@@ -1,0 +1,17 @@
+<svg width="1200" height="1500" viewBox="0 0 1200 1500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1500" fill="#F6EBDD"/>
+  <rect x="96" y="96" width="1008" height="1308" rx="72" fill="url(#a)"/>
+  <path d="M894 220c-107 80-222 126-344 210-178 123-303 324-346 583" stroke="#F8F0E7" stroke-width="24" stroke-linecap="round"/>
+  <path d="M906 335c-76 157-198 272-340 405-88 83-133 164-182 304" stroke="#35221C" stroke-opacity=".28" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="857" cy="363" r="116" fill="#E7C5B0" fill-opacity=".74"/>
+  <circle cx="445" cy="1044" r="218" fill="#2B1B17" fill-opacity=".16"/>
+  <rect x="180" y="1140" width="520" height="122" rx="24" fill="#FFF8F1" fill-opacity=".76"/>
+  <text x="222" y="1196" fill="#6F5C57" font-family="Georgia, serif" font-size="32" letter-spacing="6">EDITORIAL HERO SLOT</text>
+  <text x="222" y="1240" fill="#9F5A3C" font-family="Georgia, serif" font-size="22">Ready for salon photography or campaign stills</text>
+  <defs>
+    <linearGradient id="a" x1="96" y1="96" x2="1031" y2="1326" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDF7EF"/>
+      <stop offset="1" stop-color="#DDB29A"/>
+    </linearGradient>
+  </defs>
+</svg>

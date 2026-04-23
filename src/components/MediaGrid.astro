@@ -1,0 +1,40 @@
+---
+import type { GalleryItem } from "../data/site";
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div x-data="{ active: 'all' }">
+  <div class="flex flex-wrap gap-[0.85rem] mb-4" aria-label="Gallery filters">
+    {["all", "colour", "cut", "styling", "bridal"].map((filter) => (
+      <button
+        type="button"
+        class="filter-chip"
+        :class={`{ 'filter-chip--active': active === '${filter}' }`}
+        @click={`active = '${filter}'`}
+      >
+        {filter === "all" ? "All work" : filter}
+      </button>
+    ))}
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 max-[900px]:grid-cols-1">
+    {items.map((item) => (
+      <article
+        class="card overflow-hidden"
+        x-show={`active === 'all' || active === '${item.category}'`}
+      >
+        <img src={item.image} alt={item.alt} loading="lazy" class="w-full aspect-[4/5] object-cover" />
+        <div class="pt-[1.1rem] px-[1.2rem] pb-[1.3rem]">
+          <p class="eyebrow">{item.category}</p>
+          <h3>{item.title}</h3>
+          <p>{item.note}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>

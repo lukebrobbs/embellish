@@ -201,42 +201,32 @@ a.btn-ghost {
     justify-self: stretch;
     z-index: 0;
   }
-  .hero .hero-video { display: block; }
+  .hero .hero-video {
+    display: block;
+    z-index: 0;
+  }
 
-  /* Scrim for text readability */
+  /* Dark overlay above the video for text legibility — video remains visible underneath */
   .hero .hero-img::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--ink) 25%, transparent) 0%,
-      color-mix(in srgb, var(--ink) 55%, transparent) 50%,
-      color-mix(in srgb, var(--ink) 75%, transparent) 100%
-    );
+    background: rgba(0, 0, 0, 0.8);
     pointer-events: none;
+    z-index: 1;
   }
 
   /* Hide the floating review tag on mobile */
   .hero .hero-floating-tag { display: none; }
 
-  /* Text sits inside a frosted-glass panel for legibility over the video */
+  /* Text overlays the darkened video directly — readability comes from the video filter */
   .hero .hero-text {
     position: relative;
     z-index: 1;
     color: var(--bg);
-    background: color-mix(in srgb, var(--ink) 25%, transparent);
-    backdrop-filter: blur(20px) saturate(130%);
-    -webkit-backdrop-filter: blur(20px) saturate(130%);
-    padding: 32px 26px 28px;
-    border-radius: 16px;
-    border: 1px solid color-mix(in srgb, var(--bg) 14%, transparent);
-    box-shadow: 0 16px 48px -16px rgba(0,0,0,0.35);
   }
-  .hero .hero-eyebrow { color: color-mix(in srgb, var(--bg) 75%, transparent); }
+  .hero .hero-eyebrow { color: color-mix(in srgb, #fff 75%, transparent); }
   .hero .hero-eyebrow::before { background: currentColor; }
-  .hero h1 { color: var(--bg); }
-  .hero h1 em { color: color-mix(in srgb, var(--accent) 55%, var(--bg)); }
   .hero .hero-sub { color: color-mix(in srgb, var(--bg) 88%, transparent); }
   .hero .hero-divider-row { color: color-mix(in srgb, var(--bg) 78%, transparent); }
   .hero .hero-meta-pill strong { color: var(--bg); }
@@ -280,7 +270,7 @@ a.btn-ghost {
   font-size: clamp(44px, 5.8vw, 84px);
   line-height: 1.0;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: #fff;
   margin-bottom: 24px;
   text-wrap: balance;
 }
@@ -288,8 +278,13 @@ a.btn-ghost {
   font-family: var(--display);
   font-style: italic;
   font-weight: 400;
-  color: var(--accent);
+  color: color-mix(in srgb, var(--accent) 55%, #fff);
   letter-spacing: -0.01em;
+}
+
+@media (min-width: 881px) {
+  .hero h1 { color: var(--ink); }
+  .hero h1 em { color: var(--accent); }
 }
 
 .hero-sub {

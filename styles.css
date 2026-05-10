@@ -348,11 +348,6 @@ a.btn-ghost {
   color: var(--ink-3);
   margin-bottom: var(--space-md);
 }
-.hero-eyebrow::before {
-  content: "";
-  width: 28px; height: 1px;
-  background: currentColor;
-}
 
 .hero h1 {
   font-family: var(--display);
@@ -639,6 +634,36 @@ section { padding: var(--section-y) var(--gutter); }
 }
 .visit-block a:hover { color: var(--accent); }
 .visit-cta { margin-top: var(--space-xs); }
+
+.visit-map {
+  display: block;
+  margin-top: var(--space-md);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--bg-elev);
+  transition: border-color var(--dur-med) ease, transform var(--dur-med) ease, box-shadow var(--dur-med) ease;
+}
+.visit-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.25) contrast(0.98);
+  transition: filter var(--dur-med) ease;
+}
+.visit-map:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px -16px color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.visit-map:hover iframe { filter: none; }
+.visit-map:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
 
 /* ────────── FOOTER ────────── */
 .footer-cta {

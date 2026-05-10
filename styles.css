@@ -315,7 +315,10 @@ a.btn-ghost {
   .hero .hero-eyebrow { color: color-mix(in srgb, var(--white) 75%, transparent); }
   .hero .hero-eyebrow::before { background: currentColor; }
   .hero .hero-sub { color: color-mix(in srgb, var(--bg) 88%, transparent); }
-  .hero .hero-divider-row { color: color-mix(in srgb, var(--bg) 78%, transparent); }
+  .hero .hero-divider-row {
+    color: color-mix(in srgb, var(--bg) 78%, transparent);
+    gap: var(--space-2xs) var(--space-md);
+  }
   .hero .hero-meta-pill strong { color: var(--bg); }
 
   /* Ghost button needs to read on dark bg */
@@ -409,6 +412,12 @@ a.btn-ghost {
   color: var(--ink);
   font-weight: var(--fw-medium);
 }
+.hero-meta-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.hero-meta-link:hover { opacity: 0.7; }
 
 /* Hero image / video */
 .hero-img {

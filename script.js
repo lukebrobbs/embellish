@@ -12,28 +12,78 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Highlight today; auto "Open now / Closed now"
+// Highlight today; auto "Open now / Closed now" on the visit card and hero pill.
+// Hours are read from the rendered hours-list so there's a single source of truth.
 (function () {
-  const hours = {
-    0: null,
-    1: null,
-    2: [9, 17.5],
-    3: [9, 17.5],
-    4: [9, 19],
-    5: [9, 18],
-    6: [8.5, 16],
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const parseTime = (s) => {
+    const [h, m] = s.split(':').map(Number);
+    return h + (m || 0) / 60;
   };
+  const fmt = (h) => {
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    return `${hh}:${mm.toString().padStart(2, '0')}`;
+  };
+
+  const hours = {};
+  document.querySelectorAll('.hours-list li').forEach(li => {
+    const d = parseInt(li.dataset.day, 10);
+    const text = (li.querySelector('.time')?.textContent || '').trim();
+    const match = text.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
+    if (match) {
+      const open = parseTime(match[1]);
+      const close = parseTime(match[2]);
+      hours[d] = close > open ? [open, close] : null;
+    } else {
+      hours[d] = null;
+    }
+  });
+
   const now = new Date();
   const day = now.getDay();
   const t = now.getHours() + now.getMinutes() / 60;
+
   const todayLi = document.querySelector(`.hours-list li[data-day="${day}"]`);
   if (todayLi) todayLi.classList.add('today');
+
+  const todayHours = hours[day];
+  const isOpenNow = !!(todayHours && t >= todayHours[0] && t < todayHours[1]);
+
   const badge = document.getElementById('open-now');
-  const r = hours[day];
-  if (r && t >= r[0] && t < r[1]) {
-    badge.textContent = 'Open now';
-  } else {
-    badge.textContent = 'Closed now';
-    badge.classList.add('is-closed');
+  if (badge) {
+    if (isOpenNow) {
+      badge.textContent = 'Open now';
+      badge.classList.remove('is-closed');
+    } else {
+      badge.textContent = 'Closed now';
+      badge.classList.add('is-closed');
+    }
+  }
+
+  const heroStatus = document.getElementById('hero-open-status');
+  const heroPill = document.getElementById('hero-open-pill');
+  if (heroStatus) {
+    if (isOpenNow) {
+      heroPill?.classList.remove('is-closed');
+      heroStatus.innerHTML = `<strong>Open today</strong> · ${fmt(todayHours[0])} – ${fmt(todayHours[1])}`;
+    } else {
+      heroPill?.classList.add('is-closed');
+      if (todayHours && t < todayHours[0]) {
+        heroStatus.innerHTML = `<strong>Closed</strong> · Opens today at ${fmt(todayHours[0])}`;
+      } else {
+        let nextDay = null;
+        for (let i = 1; i <= 7; i++) {
+          const d = (day + i) % 7;
+          if (hours[d]) { nextDay = d; break; }
+        }
+        if (nextDay !== null) {
+          const label = nextDay === (day + 1) % 7 ? 'tomorrow' : dayNames[nextDay];
+          heroStatus.innerHTML = `<strong>Closed</strong> · Opens ${label} at ${fmt(hours[nextDay][0])}`;
+        } else {
+          heroStatus.innerHTML = `<strong>Closed</strong>`;
+        }
+      }
+    }
   }
 })();

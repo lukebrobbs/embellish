@@ -12,7 +12,78 @@
 
 <link rel="stylesheet" href="styles.css" />
 
-<script type="application/ld+json" src="schema.jsonld"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "@id": "https://embellishstudio.co.uk/#salon",
+  "name": "Embellish Hair & Makeup Studio",
+  "alternateName": "Embellish Studio",
+  "description": "Luxury hair studio on Chatsworth Road, Chesterfield. Premium colour, expert cuts and refined wedding mornings.",
+  "url": "https://embellishstudio.co.uk/",
+  "telephone": "+441246235622",
+  "email": "weddings@embellishstudio.co.uk",
+  "priceRange": "££",
+  "image": [
+    "https://embellishstudio.co.uk/media/hero-poster.jpg"
+  ],
+  "logo": "https://embellishstudio.co.uk/media/logo-text.png",
+  "foundingDate": "2015",
+  "areaServed": {
+    "@type": "City",
+    "name": "Chesterfield"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "338 Chatsworth Road",
+    "addressLocality": "Chesterfield",
+    "addressRegion": "Derbyshire",
+    "postalCode": "S40 2BY",
+    "addressCountry": "GB"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 53.232699,
+    "longitude": -1.454003
+  },
+  "hasMap": "https://maps.google.com/?q=338+Chatsworth+Road+Chesterfield",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday",   "opens": "09:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday",  "opens": "09:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "10:00", "closes": "20:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday",   "opens": "09:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00" }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/embellishchesterfield",
+    "https://www.fresha.com/en-GB/a/embellish-studio-chesterfield-338-chatsworth-road-s64qp0zj"
+  ],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.fresha.com/en-GB/a/embellish-studio-chesterfield-338-chatsworth-road-s64qp0zj",
+      "inLanguage": "en-GB",
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "Reservation",
+      "name": "Salon appointment"
+    }
+  },
+  "makesOffer": [
+    { "@type": "Offer", "name": "Cuts & finish",  "category": "Hair cut" },
+    { "@type": "Offer", "name": "Colour",         "category": "Hair colouring", "priceCurrency": "GBP", "price": "96",  "priceSpecification": { "@type": "PriceSpecification", "price": "96",  "priceCurrency": "GBP", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "Balayage",       "category": "Hair colouring", "priceCurrency": "GBP", "price": "111", "priceSpecification": { "@type": "PriceSpecification", "price": "111", "priceCurrency": "GBP", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "Treatments",     "category": "Hair treatment" },
+    { "@type": "Offer", "name": "Bridal hair",    "category": "Wedding hair" },
+    { "@type": "Offer", "name": "Makeup",         "category": "Makeup" }
+  ]
+}
+</script>
 </head>
 <body>
 

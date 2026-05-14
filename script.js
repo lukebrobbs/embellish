@@ -87,3 +87,20 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
   }
 })();
+
+// Hero video: only fetch on small viewports, skip on reduced-data connections.
+// Desktop hides the element via CSS (.hero-video { display: none; }), so loading
+// the 3.4 MB MP4 there is pure waste.
+(function () {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+  const isSmall = window.matchMedia('(max-width: 880px)').matches;
+  const reducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+  if (!isSmall || reducedData) return;
+  const source = document.createElement('source');
+  source.src = 'media/hero.mp4';
+  source.type = 'video/mp4';
+  video.appendChild(source);
+  video.load();
+  video.play().catch(() => { /* autoplay blocked — poster stays visible */ });
+})();

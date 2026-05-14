@@ -148,6 +148,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
   color: var(--ink);
 }
+.brand picture, .footer-brand picture { display: contents; }
 .brand-mark {
   height: 44px;
   width: auto;
@@ -425,6 +426,11 @@ a.btn-ghost {
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--bg-elev) center/cover no-repeat url('media/hero-poster.jpg');
+  background-image: image-set(
+    url('media/hero-poster.avif') type('image/avif'),
+    url('media/hero-poster.webp') type('image/webp'),
+    url('media/hero-poster.jpg') type('image/jpeg')
+  );
 }
 /* Video hidden by default — only shown on mobile (see media query below) */
 .hero-video {

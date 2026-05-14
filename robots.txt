@@ -1,3 +1,7 @@
+User-agent: facebookexternalhit
+Disallow: /api/
+Allow: /
+
 User-agent: *
 Allow: /
 
